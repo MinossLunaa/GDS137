@@ -10,8 +10,7 @@ function Ball(){
     
     this.draw = function(){
         context.save();
-            context.fillStyle = "#ff0";
-            //context.translate(this.x, this.y);
+            context.fillStyle = this.color;
             context.beginPath();
             context.arc(this.x, this.y, this.radius, 0, 360*Math.PI/180, true);
             context.closePath();
