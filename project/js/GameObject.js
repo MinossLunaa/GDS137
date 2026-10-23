@@ -53,7 +53,7 @@ function GameObject(x,y,w,h,color){
             context.fill();
         context.restore();
     }
-
+    
     this.move = function(){
         this.x -= this.vx;
         this.y += this.vy;
