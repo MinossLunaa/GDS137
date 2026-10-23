@@ -6,6 +6,7 @@ var vx = 5;
 var vy = 5;
 var p1wins = 0;
 var p2wins = 0;
+var img = document.getElementById("ric");
 
 var player1;
 var player2;
@@ -17,7 +18,7 @@ context = canvas.getContext("2d");
 //name                    x    y               w    h               color
 player1 = new GameObject(10, canvas.height/2, 10, 100);
 player2 = new GameObject(canvas.width - 10, canvas.height/2, 10, 100);
-ball = new GameObject(canvas.width/2, canvas.height/2, 25, 25,"#00ff00");
+ball = new GameObject(canvas.width/2, canvas.height/2, 25, 25);
 timer = setInterval(animate, interval);
 
 function animate(){
@@ -41,6 +42,8 @@ function animate(){
     context.fillText("Player 1  |   Player 2", canvas.width/2 - 80, 30);
     context.fillText(p1wins + "    " + p2wins, canvas.width / 2 - 20, 50);
 
+    context.drawImage(img, ball.x - 11, ball.y - 11, ball.width, ball.height);
+
     if(w){player1.y -= vy;}
     if(s){player1.y += vy;}
     /*if(a){player1.x += -2;}
@@ -60,5 +63,5 @@ function animate(){
     //draw
     player1.drawRect();
     player2.drawRect();
-    ball.drawCircle();
+    //ball.drawCircle();
 }
