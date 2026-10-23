@@ -13,7 +13,7 @@ context = canvas.getContext("2d");
 
 //name                    x    y               w    h                       color
 player1 = new GameObject(10, canvas.height/2, 10, 100);
-ball = new GameObject(canvas.width - 750, canvas.height/2+75, 100, 100,"#00ff00");
+ball = new GameObject(canvas.width / 2, canvas.height/2, 100, 100,"#00ff00");
 
 timer = setInterval(animate, interval);
 
@@ -56,13 +56,24 @@ function animate(){
 
     //ball collisions
     if(ball.collide(player1)){
-        ball.vx = -ball.vx;
+        if(ball.y < player1.y){
+            ball.vy = -5;
+        }
+        if(ball.y < player1.y + 25 && ball.y > player1.y - 25){
+            ball.vy = 0;
+        }
+        if(ball.y > player1.y){
+            ball.vy = 5;
+        }
+        ball.vx = -5;
+    }
+
+    if(ball.x < ball.width / 2){
+        ball.x = canvas.width/2;
+        ball.y = canvas.height/2;
     }
     if(ball.x > canvas.width - ball.width / 2){
         ball.vx = -ball.vx;
-    }
-    if(ball.x < ball.width / 2){
-        ball.vx *= -1;
     }
     if(ball.y > canvas.height - ball.height / 2){
         ball.vy = -ball.vy;
