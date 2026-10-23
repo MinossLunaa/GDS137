@@ -11,9 +11,9 @@ var vy = 5;
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
-//name                    x    y               w    h                       color
+//name                    x    y               w    h               color
 player1 = new GameObject(10, canvas.height/2, 10, 100);
-ball = new GameObject(canvas.width / 2, canvas.height/2, 100, 100,"#00ff00");
+ball = new GameObject(canvas.width / 2, canvas.height/2, 25, 25,"#00ff00");
 
 timer = setInterval(animate, interval);
 
@@ -25,11 +25,9 @@ function animate(){
 
     if(w){
         player1.y -= vy;
-        console.log("up")
     }
     if(s){
         player1.y += vy;
-        console.log("down")
     }
     /*if(a){
         player1.x += -2;
@@ -56,16 +54,19 @@ function animate(){
 
     //ball collisions
     if(ball.collide(player1)){
-        if(ball.y < player1.y){
-            ball.vy = -5;
+        if(ball.y < player1.y - 17){
+            ball.vy = -7;
+            console.log("top hit");
         }
-        if(ball.y < player1.y + 25 && ball.y > player1.y - 25){
+        else if(ball.y > player1.y + 17){
+            ball.vy = 7;
+            console.log("bottom hit");
+        }
+        else{
             ball.vy = 0;
+            console.log("mid hit");
         }
-        if(ball.y > player1.y){
-            ball.vy = 5;
-        }
-        ball.vx = -5;
+        ball.vx = -ball.vx;
     }
 
     if(ball.x < ball.width / 2){

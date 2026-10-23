@@ -23,7 +23,7 @@ function GameObject(x,y,w,h,color){
     else
         this.color = color;
 
-    this.vx = 5;
+    this.vx = 7;
     this.vy = 0;
 
    this.drawRect = function(){
