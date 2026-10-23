@@ -2,12 +2,14 @@ var canvas;
 var context;
 var timer;
 var interval = 1000/60;
-var player1;
-var player2;
-var prevX;
-var prevY;
 var vx = 5;
 var vy = 5;
+var p1wins = 0;
+var p2wins = 0;
+
+var player1;
+var player2;
+
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
@@ -24,6 +26,10 @@ function animate(){
     //move and wipe
     ball.move();
     context.clearRect(0,0,canvas.width, canvas.height);
+
+    context.font = "20px Veranda";
+    context.fillText("Player 1  |  Player 2", canvas.width/2 - 80, 30);
+    context.fillText(p1wins + " - " + p2wins, canvas.width / 2 - 20, 50);
 
     if(w){player1.y -= vy;}
     if(s){player1.y += vy;}

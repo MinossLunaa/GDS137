@@ -39,11 +39,13 @@ function ballBounce(obj){
         obj.x = canvas.width/2;
         obj.y = canvas.height/2;
         obj.vy = 0;
+        p2wins++;
     }
     if(obj.x > canvas.width - obj.width / 2){
         obj.x = canvas.width/2;
         obj.y = canvas.height/2;
         obj.vy = 0;
+        p1wins++;
     }
     if(obj.y > canvas.height - obj.height / 2){
         obj.vy = -obj.vy;
