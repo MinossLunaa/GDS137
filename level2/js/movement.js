@@ -5,28 +5,30 @@ var interval = 1000/60;
 var player1;
 var prevX;
 var prevY;
+var vx = 5;
+var vy = 5;
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
 //name                    x    y               w    h                       color
-player1 = new GameObject(100, canvas.height/2, 50, 200);
-lBlock1 = new GameObject(canvas.width - 750, canvas.height/2+75, 100, 100,"#00ff00");
-rBlock1 = new GameObject((canvas.width-350), canvas.height/2, 100, 100, "orange");
+player1 = new GameObject(10, canvas.height/2, 10, 100);
+ball = new GameObject(canvas.width - 750, canvas.height/2+75, 100, 100,"#00ff00");
 
 timer = setInterval(animate, interval);
 
 function animate(){
 
+    ball.move();
     //clear canvas
     context.clearRect(0,0,canvas.width, canvas.height);
 
     if(w){
-        player1.y += -2;
+        player1.y -= vy;
         console.log("up")
     }
     if(s){
-        player1.y += 2;
+        player1.y += vy;
         console.log("down")
     }
     /*if(a){
@@ -38,7 +40,7 @@ function animate(){
         console.log("right")
     }*/
 
-    //wall collisions
+    //player wall collisions
     if(player1.x > canvas.width - player1.width / 2 ||
        player1.x < player1.width / 2 ||
        player1.y > canvas.height - player1.height / 2 ||
@@ -52,25 +54,24 @@ function animate(){
         prevY = player1.y;
     }
 
-    //obj collisions
-    if(lBlock1.collide(player1)){
-        lBlock1.color = "yellow";
+    //ball collisions
+    if(ball.collide(player1)){
+        ball.vx = -ball.vx;
     }
-    else{
-        lBlock1.color = "#00ff00";
+    if(ball.x > canvas.width - ball.width / 2){
+        ball.vx = -ball.vx;
     }
-
-    if(rBlock1.collide(player1)){
-        player1.x = prevX;
-        player1.y = prevY;
+    if(ball.x < ball.width / 2){
+        ball.vx *= -1;
     }
-    else{
-        prevX = player1.x;
-        prevY = player1.y;
+    if(ball.y > canvas.height - ball.height / 2){
+        ball.vy = -ball.vy;
+    }
+    if(ball.y < ball.height / 2){
+        ball.vy *= -1;
     }
     
     //draw
     player1.drawRect();
-    lBlock1.drawCircle();
-    rBlock1.drawCircle();
+    ball.drawCircle();
 }

@@ -23,8 +23,8 @@ function GameObject(x,y,w,h,color){
     else
         this.color = color;
 
-    this.vx = 0;
-    this.vy = 0;
+    this.vx = 5;
+    this.vy = 5;
 
    this.drawRect = function(){
         context.save();
@@ -73,4 +73,5 @@ function GameObject(x,y,w,h,color){
            }
            return false;
     }
+
 }   
