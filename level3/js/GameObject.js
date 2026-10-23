@@ -19,7 +19,7 @@ function GameObject(x,y,w,h,color){
         this.height = h;
 
     if(color == undefined)
-        this.color = "#0000ff";
+        this.color = "black";
     else
         this.color = color;
 

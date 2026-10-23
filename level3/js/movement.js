@@ -15,10 +15,9 @@ canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
 //name                    x    y               w    h               color
-player1 = new GameObject(10, canvas.height/2, 10, 100, "black");
-player2 = new GameObject(canvas.width - 10, canvas.height/2, 10, 100, "black");
-ball = new GameObject(canvas.width / 2, canvas.height/2, 25, 25,"#00ff00");
-
+player1 = new GameObject(10, canvas.height/2, 10, 100);
+player2 = new GameObject(canvas.width - 10, canvas.height/2, 10, 100);
+ball = new GameObject(canvas.width/2, canvas.height/2, 25, 25,"#00ff00");
 timer = setInterval(animate, interval);
 
 function animate(){
@@ -27,9 +26,20 @@ function animate(){
     ball.move();
     context.clearRect(0,0,canvas.width, canvas.height);
 
+    //draw a line
+    context.save();
+    context.strokeStyle = "black";
+    context.beginPath();
+    context.moveTo(canvas.width / 2, 0);
+    context.lineTo(canvas.width / 2, canvas.height);
+    context.closePath();
+    context.lineWidth = 3;
+    context.stroke();
+    context.restore();
+
     context.font = "20px Veranda";
-    context.fillText("Player 1  |  Player 2", canvas.width/2 - 80, 30);
-    context.fillText(p1wins + " - " + p2wins, canvas.width / 2 - 20, 50);
+    context.fillText("Player 1  |   Player 2", canvas.width/2 - 80, 30);
+    context.fillText(p1wins + "    " + p2wins, canvas.width / 2 - 20, 50);
 
     if(w){player1.y -= vy;}
     if(s){player1.y += vy;}
