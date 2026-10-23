@@ -30,14 +30,14 @@ function animate(){
         player1.y += 2;
         console.log("down")
     }
-    if(a){
+    /*if(a){
         player1.x += -2;
         console.log("left")
     }
     if(d){
         player1.x += 2;
         console.log("right")
-    }
+    }*/
 
     //collisions
     if(lBlock1.collide(player1)){
