@@ -9,9 +9,8 @@ var prevY;
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
+//name                    x    y               w    h                       color
 player1 = new GameObject(100, canvas.height/2, 50, 200);
-
-//name                     x                    y                 w    h   color
 lBlock1 = new GameObject(canvas.width - 750, canvas.height/2+75, 100, 100,"#00ff00");
 rBlock1 = new GameObject((canvas.width-350), canvas.height/2, 100, 100, "orange");
 
@@ -39,7 +38,21 @@ function animate(){
         console.log("right")
     }*/
 
-    //collisions
+    //wall collisions
+    if(player1.x > canvas.width - player1.width / 2 ||
+       player1.x < player1.width / 2 ||
+       player1.y > canvas.height - player1.height / 2 ||
+       player1.y < player1.height / 2)
+    {
+        player1.x = prevX;
+        player1.y = prevY;
+    } else
+    {
+        prevX = player1.x;
+        prevY = player1.y;
+    }
+
+    //obj collisions
     if(lBlock1.collide(player1)){
         lBlock1.color = "yellow";
     }
