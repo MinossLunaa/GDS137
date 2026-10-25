@@ -6,6 +6,7 @@ var arrowUp = false;
 var arrowLeft = false;
 var arrowDown = false;
 var arrowRight = false;
+click = false;
 
 var mouseX = 0;
 var mouseY = 0;
@@ -13,9 +14,17 @@ var mouseRotation = 0;
 
 document.addEventListener("keydown", press);
 document.addEventListener("keyup", release);
-document.addEventListener("mousemove", spin);
+document.addEventListener("mousemove", mousemove);
+document.addEventListener("mousedown", mousedown);
+document.addEventListener("mouseup", mouseup);
 
-function spin(e){
+function mousedown(){
+    click = true;
+}
+function mouseup(){
+    click = false;
+}
+function mousemove(e){
     var rect = document.getElementById("canvas").getBoundingClientRect();
 
     mouseX = e.clientX - rect.left;
@@ -85,4 +94,5 @@ function release(e){
         arrowRight = false;
     }
 }
+
 
