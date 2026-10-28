@@ -6,7 +6,7 @@ var gravity = 1;
 var friction = 1;
 var ballForce = 1;
 var img = document.getElementById("ric");
-var vx = 5;
+var vx = 0;
 var maxSpeed = 10;
 
 var player;
