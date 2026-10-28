@@ -32,7 +32,7 @@ function mousemove(e){
 
     var dx = mouseX - player.x;
     var dy = mouseY - player.y;
-    mouseRotation = Math.atan2 (dy, dx) + Math.PI / 2;    
+    mouseRotation = Math.atan2 (dy, dx) + Math.PI / 2;
 }
 
 function press(e){
