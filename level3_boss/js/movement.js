@@ -40,7 +40,7 @@ function animate(){
     //score
     context.font = "16px Arial black";
     context.fillStyle = "#555555"
-    context.fillText("Score: " + score, 80, 25); //coordinates are correct but don't visually match location in instructions
+    context.fillText("Score: " + score, 80, 25); 
 
     //collisions
     wallBorder(player);

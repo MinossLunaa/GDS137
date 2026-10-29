@@ -27,6 +27,7 @@ function GameObject(x,y,w,h,color, rotation){
         this.rotation = 0;
     else{
         this.rotation = rotation;
+        context.rotate(rotation);
     }
 
     this.drawPlayer = function(){

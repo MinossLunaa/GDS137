@@ -36,7 +36,7 @@ function paddleHit(player, obj){
             console.log("5");
             obj.vx = ballForce * 5;
         }
-        
+
         obj.vy = -35;
         score++;
     }
