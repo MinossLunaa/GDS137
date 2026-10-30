@@ -1,4 +1,4 @@
-function GameObject(x,y,w,h,color, rotation){
+function GameObject(x,y,w,h,color, hp, layer){
 
     if(x == undefined)
         this.x = canvas.width/2;
@@ -23,12 +23,18 @@ function GameObject(x,y,w,h,color, rotation){
     else
         this.color = color;
 
-    if(rotation == undefined)
-        this.rotation = 0;
-    else{
-        this.rotation = rotation;
-        context.rotate(rotation);
+    if(hp == undefined)
+        this.hp = 100;
+    else
+        this.hp = hp;
+
+    if(layer == undefined){
+        this.layer = 0;
     }
+    else
+        this.layer = layer;
+    //Enemies layer = 1
+    //Walls layer = 2
 
     this.drawPlayer = function(){
         context.save();
@@ -38,17 +44,9 @@ function GameObject(x,y,w,h,color, rotation){
             if(showHitboxes == true){
             context.fillRect((-this.width / 2), (-this.height / 2), this.width, this.height);
             }
-            //context.drawImage(bam, -this.x / 4 + 20, -this.y / 4 + 34, this.width + 65, this.height + 65);
+            context.drawImage(bam, (-this.width / 2) - 30, (-this.height/2) - 30, this.width + 60, this.height + 60);
         context.restore();
     }
-
-    // this.printImage = function(img, rotation){
-    //     context.save();
-    //         context.translate(this.x, this.y);
-    //         context.rotate(rotation);
-    //         context.drawImage(img, this.x, this.y, this.w, this.h);
-    //     context.restore();
-    // }
 
     this.drawLine = function(startingX, startingY, endingX, endingY){
         context.save();
@@ -61,10 +59,10 @@ function GameObject(x,y,w,h,color, rotation){
 
     }
 
-   this.drawRect = function(){
+   this.drawRect = function(rotation){
         context.save();
             context.fillStyle = this.color;
-            context.translate(this.x, this.y);
+            context.translate(this.x,this.y);
             context.rotate(rotation);
             context.fillRect((-this.width / 2), (-this.height / 2), this.width, this.height);
         context.restore();
@@ -105,9 +103,18 @@ function GameObject(x,y,w,h,color, rotation){
            this.right() > obj.left() &&
            this.top() < obj.bottom() &&
            this.bottom() > obj.top()){
-            return true
+            return true;
            }
            return false;
+    }
+
+    this.ContainsPoint = function(x, y){
+        if(x >= this.x - this.width/2 && x <= this.x + this.width/2 &&
+            y >= this.y - this.height/2 && y <= this.y +this.height/2
+        ){
+         return true;
+        }
+        return false;
     }
 
 }   
