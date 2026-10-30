@@ -4,14 +4,16 @@ var timer;
 var interval = 1000/60;
 
 var bam = document.getElementById("bam");
+var alien = document.getElementById("alien");
+var blank = document.getElementById("blank")
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
 //name   x  y    w  h    color    hp    layer
-var player = new GameObject(300, canvas.height/2, 50, 50, "red", 100);
-var enemy1 = new GameObject(canvas.width - 300, canvas.height/2, 50, 50, "green", 100, 1);
-var enemy1rad = new GameObject(enemy1.x, enemy1.y, 500, 500, "yellow");
+var player = new GameObject(100, canvas.height/2, 50, 50, "red", 100);
+var enemy1 = new GameObject(canvas.width - 300, canvas.height/2, 100, 100, "green", 100, 1);
+var enemy1rad = new GameObject(enemy1.x, enemy1.y, 550, 550, "yellow");
 
 const enemies = [enemy1];
 
@@ -53,10 +55,10 @@ function animate(){
     chasePlayer(enemy1rad, enemy1);
 
     context.font = "20px Arial";
-    context.fillText(enemy1.hp, enemy1.x, enemy1.y - 45);
-    context.fillText(player.hp, player.x, player.y - 70);
+    context.fillText(enemy1.hp, enemy1.x, enemy1.y - 50);
+    context.fillText(player.hp, player.x, player.y - 75);
 
-    enemy1.drawRect();
+    enemy1.drawEnemy();
     player.drawPlayer();
 }
 

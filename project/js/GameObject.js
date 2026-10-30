@@ -48,23 +48,24 @@ function GameObject(x,y,w,h,color, hp, layer){
         context.restore();
     }
 
-    this.drawLine = function(startingX, startingY, endingX, endingY){
-        context.save();
-            context.beginPath();
-            context.moveTo(startingX, startingY);
-            context.lineTo(endingX, endingY);
-            context.closePath();
-            context.stroke();
-        context.restore();
-
-    }
-
-   this.drawRect = function(rotation){
+    this.drawEnemy = function(){
         context.save();
             context.fillStyle = this.color;
             context.translate(this.x,this.y);
-            context.rotate(rotation);
+            if(showHitboxes == true){
             context.fillRect((-this.width / 2), (-this.height / 2), this.width, this.height);
+            }
+            context.drawImage(alien, (-this.width / 2) - 15, (-this.height/2) - 15, this.width + 20, this.height + 20);
+        context.restore();
+    }
+
+   this.drawRect = function(){
+        context.save();
+            context.fillStyle = this.color;
+            context.translate(this.x,this.y);
+            if(showHitboxes == true){
+            context.fillRect((-this.width / 2), (-this.height / 2), this.width, this.height);
+            }
         context.restore();
     }
 

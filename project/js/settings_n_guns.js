@@ -9,7 +9,6 @@ var vy = PLAYER_SPEED;
 var enemy_damage = 1;
 
 var showHitboxes = true;
-var canShoot = true;
 
 var pistol = true;
 var shotgun = false;
@@ -19,6 +18,8 @@ var smg = false;
 var damage = 0;
 var shoot_dist = 0;
 var shoot_cooldown = 0;
+
+var canShoot = true;
 
 if(pistol == true){
     damage = 25;
