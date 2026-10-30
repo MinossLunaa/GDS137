@@ -11,7 +11,7 @@ canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
 //name   x  y    w  h    color    hp    layer
-var player = new GameObject(100, canvas.height/2, 50, 50, "red", 100);
+var player = new GameObject(100, canvas.height/2, 50, 50, "red", player_hp);
 
 var enemy1 = new GameObject(canvas.width - 300, canvas.height/2, 100, 100, "green", 100, 1);
 var enemy1rad = new GameObject(enemy1.x, enemy1.y, 550, 550, "yellow");

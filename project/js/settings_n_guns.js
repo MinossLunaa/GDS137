@@ -1,14 +1,13 @@
-const PLAYER_SPEED = 5;
-const ENEMY_SPEED = 5.25;
-
 const GRAVEYARD = 5000;
-
-var vx = PLAYER_SPEED;
-var vy = PLAYER_SPEED;
-
-var enemy_damage = 1;
-
 var showHitboxes = true;
+
+var player_hp = 100;
+var playerSpeed = 5;
+var vx = player_speed;
+var vy = player_speed;
+
+var enemy_speed = 5.25;
+var enemy_damage = 1;
 
 var pistol = true;
 var shotgun = false;
@@ -18,7 +17,6 @@ var smg = false;
 var damage = 0;
 var shoot_dist = 0;
 var shoot_cooldown = 0;
-
 var canShoot = true;
 
 if(pistol == true){
