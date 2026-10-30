@@ -12,6 +12,7 @@ context = canvas.getContext("2d");
 
 //name   x  y    w  h    color    hp    layer
 var player = new GameObject(100, canvas.height/2, 50, 50, "red", 100);
+
 var enemy1 = new GameObject(canvas.width - 300, canvas.height/2, 100, 100, "green", 100, 1);
 var enemy1rad = new GameObject(enemy1.x, enemy1.y, 550, 550, "yellow");
 
@@ -39,9 +40,6 @@ function animate(){
                 if(result.enemy.layer == 1)
                 {
                 result.enemy.hp = result.enemy.hp - damage;
-                if(result.enemy.hp <= 0){
-                    result.enemy.y = GRAVEYARD;
-                }
             }
         }
 
@@ -51,7 +49,8 @@ function animate(){
 
     }
 
-    wallBorder(player);
+    playerBounds(player);
+
     chasePlayer(enemy1rad, enemy1);
 
     context.font = "20px Arial";
