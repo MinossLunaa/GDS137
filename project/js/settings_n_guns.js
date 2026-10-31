@@ -13,8 +13,8 @@ var ammoUsage = 1;
 var enemySpeed = 5.25;
 var enemyDamage = 1;
 
-var pistol = false;
-var shotgun = true;
+var pistol = true;
+var shotgun = false;
 var sniper = false;
 var smg = false;
 
