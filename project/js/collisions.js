@@ -82,8 +82,8 @@ function chasePlayer(enemyrad, enemy){
         var distance = Math.sqrt(dx*dx + dy*dy)
         if(distance > 0)
         {
-        enemy.x += (dx/distance) * ENEMY_SPEED;
-        enemy.y += (dy/distance) * ENEMY_SPEED;
+        enemy.x += (dx/distance) * enemySpeed;
+        enemy.y += (dy/distance) * enemySpeed;
 
         enemyrad.x = enemy.x;
         enemyrad.y = enemy.y;
@@ -91,7 +91,10 @@ function chasePlayer(enemyrad, enemy){
     }
 
     if(player.collide(enemy)){
-        player.hp -= enemy_damage;
+        player.hp -= enemyDamage;
+        healthColor = "red";
+    }else{
+        healthColor = "white";
     }
 
     if(enemy.hp <= 0){

@@ -44,7 +44,7 @@ function GameObject(x,y,w,h,color, hp, layer){
             if(showHitboxes == true){
             context.fillRect((-this.width / 2), (-this.height / 2), this.width, this.height);
             }
-            context.drawImage(bam, (-this.width / 2) - 30, (-this.height/2) - 30, this.width + 60, this.height + 60);
+            context.drawImage(playerModel, (-this.width / 2) - 30, (-this.height/2) - 30, this.width + 60, this.height + 60);
         context.restore();
     }
 

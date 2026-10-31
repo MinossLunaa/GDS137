@@ -1,45 +1,58 @@
 const GRAVEYARD = 5000;
 var showHitboxes = true;
 
-var player_hp = 100;
+//playerHp in main
+var playerModel = bam_pistol;
 var playerSpeed = 5;
-var vx = player_speed;
-var vy = player_speed;
+var vx = playerSpeed;
+var vy = playerSpeed;
 
-var enemy_speed = 5.25;
-var enemy_damage = 1;
+var ammo = 10;
+var ammoUsage = 1;
 
-var pistol = true;
-var shotgun = false;
+var enemySpeed = 5.25;
+var enemyDamage = 1;
+
+var pistol = false;
+var shotgun = true;
 var sniper = false;
 var smg = false;
 
-var damage = 0;
-var shoot_dist = 0;
-var shoot_cooldown = 0;
 var canShoot = true;
+var damage = 0;
+var shootDist = 0;
+var shootCooldown = 0;
 
 if(pistol == true){
     damage = 25;
-    shoot_dist = 400;
-    shoot_cooldown = 1000;
+    shootDist = 400;
+    shootCooldown = 1000;
+    playerModel = bam_pistol;
+    ammoUsage = 1;
 }
 
 else if(shotgun == true){
     damage = 50;
-    shoot_dist = 200;
-    shoot_cooldown = 1000;
-}
-
-else if(sniper == true){
-    damage = 99;
-    shoot_dist = 1000;
-    shoot_cooldown = 2000;
+    shootDist = 200;
+    shootCooldown = 1000;
+    playerModel = bam_shotgun;
+    ammoUsage = 2;
 }
 
 else if(smg == true){
     damage = 5;
-    shoot_dist = 400;
-    shoot_cooldown = 100;
+    shootDist = 400;
+    shootCooldown = 100;
+    playerModel = bam_smg;
+    ammoUsage = 0.25;
 }
+
+else if(sniper == true){
+    damage = 99;
+    shootDist = 1000;
+    shootCooldown = 2000;
+    playerModel = bam_sniper;
+    ammoUsage = 1;
+}
+
 
