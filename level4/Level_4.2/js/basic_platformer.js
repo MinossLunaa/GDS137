@@ -72,6 +72,16 @@ function animate()
 		player.vy = 0;
 		player.canJump = true;
 	}
+	while(platform0.hitTestPoint(player.bottomRight()) && player.vy >= 0){
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform0.hitTestPoint(player.bottomLeft()) && player.vy >= 0){
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
 	while(platform0.hitTestPoint(player.left()) && player.vx <=0)
 	{
 		player.x++;
@@ -99,6 +109,17 @@ function animate()
 		player.x--;
 		player.vx = 0;
 	}
+	while(platform1.hitTestPoint(player.bottomRight()) && player.vy >= 0){
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform1.hitTestPoint(player.bottomLeft()) && player.vy >= 0){
+
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
 	
 	
 	//---------Objective: Jump the gap to get the blue pearl----------------------------------------------------------------------------------------------------
@@ -111,6 +132,8 @@ function animate()
 				would be to create actual bottomRight() and bottomLeft() methods in your GameObject. However this is not necessary to complete this level. 
 				You simply need to change the values of the x and y properties of the object literals listed below to find the solution.
 	*/
+
+
 
 	while(platform0.hitTestPoint({x:player.x, y:player.y}) && player.vy >=0)
 	{
@@ -138,5 +161,7 @@ function animate()
 	player.drawRect();
 	
 	goal.drawCircle();
+
+	player.drawDebug();
 }
 

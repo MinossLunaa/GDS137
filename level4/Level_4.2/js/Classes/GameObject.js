@@ -77,6 +77,12 @@ function GameObject(obj)
 	{
 		return {x:this.x , y:this.y + this.height/2}
 	}
+	this.bottomRight = function(){
+		return {x:this.x + this.width/2, y:this.y + this.height/2}
+	}
+	this.bottomLeft = function(){
+		return {x:this.x - this.width/2, y:this.y + this.height/2}
+	}
 	
 	this.hitTestObject = function(obj)
 	{
@@ -120,6 +126,8 @@ function GameObject(obj)
 		context.fillRect(this.top().x-size/2, this.top().y-size/2, size, size);
 		context.fillRect(this.bottom().x-size/2, this.bottom().y-size/2, size, size);
 		context.fillRect(this.x-size/2, this.y-size/2, size, size);
+		context.fillRect(this.bottomRight().x-size/2, this.bottom().y-size/2, size, size);
+		context.fillRect(this.bottomLeft().x-size/2, this.bottom().y-size/2, size, size);
 		context.restore();
 	}
 }
