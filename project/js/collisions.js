@@ -1,4 +1,4 @@
-function playerBounds(player){
+function wallBounds(player, wall){
     if(player.x > canvas.width - player.width / 2 ||
        player.x < player.width / 2 ||
        player.y > canvas.height - player.height / 2 ||
@@ -6,18 +6,13 @@ function playerBounds(player){
     {
         player.x = player.prevX;
         player.y = player.prevY;
-    } else
-    {
-        player.prevX = player.x;
-        player.prevY = player.y;
-    }
-}
-
-function wallHit(player, wall){
-    if(player.collide(wall)){
+    } 
+    else if(player.collide(wall)){
         player.x = player.prevX;
         player.y = player.prevY;
-    }else{
+    }
+    else
+    {
         player.prevX = player.x;
         player.prevY = player.y;
     }
@@ -99,6 +94,9 @@ function chasePlayer(enemyrad, enemy){
 
     if(enemy.hp <= 0){
         enemy.y = GRAVEYARD;
+        enemyrad.y = GRAVEYARD;
+        enemy.prevX = GRAVEYARD;
+        enemy.prevY = GRAVEYARD;
         dx = 0;
         dy = 0;
     }

@@ -14,9 +14,9 @@ var enemySpeed = 5.25;
 var enemyDamage = 1;
 
 var pistol = false;
-var shotgun = false;
+var shotgun = true;
 var sniper = false;
-var smg = true;
+var smg = false;
 
 var canShoot = true;
 var damage = 0;

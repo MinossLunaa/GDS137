@@ -1,7 +1,7 @@
 canvas{
-    background-image: url(/project/images/tile.png);
-    background-color: #cccccc;
 	border:3px solid black;
+    background-image: url(../images/tile.png);
+    background-color: #cccccc;
     padding-left: 0;
     padding-right: 0;
     margin-left: auto;
@@ -9,7 +9,7 @@ canvas{
     display: block;
 }
 
-#floor{
+#shooting{
     display:none;
 }
 
