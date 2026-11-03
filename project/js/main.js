@@ -68,15 +68,16 @@ function animate(){
 
     chasePlayer(enemy1rad, enemy1);
 
-    //enemy hp
-    context.font = "20px Arial";
-    context.fillText(enemy1.hp, enemy1.x, enemy1.y - 50);
+    // enemy hp
+    // context.font = "20px Arial";
+    // context.fillText(enemy1.hp, enemy1.x, enemy1.y - 50);
     
     wall1.drawRect();
 
     enemy1.drawEnemy();
 
     player.drawPlayer();
+
 
     context.fillStyle = healthColor; 
     context.drawImage(hp_image, (canvas.width / 2 - 500), canvas.height - 80, 75, 75);
