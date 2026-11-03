@@ -17,7 +17,7 @@ canvas = document.getElementById("canvas");
 	canvas.style.backgroundColor = "black";
 	
 //This is used to determine which state is being called
-var currentState = 4;
+var currentState = 5;
 //This will be an array of functions that can be called using an index
 var states =[];
 
@@ -180,9 +180,7 @@ function congrats()
 
 function theEnd()
 {
-	//---------------------------------------------INSTRUCTIONS---------------------------------------------
-	//-----------------------1. Change the current state to 4-----------------------------------------------
-	//-----------------------2. Run the program to see the end----------------------------------------------
+	currentState = 4;
 }
 
 
