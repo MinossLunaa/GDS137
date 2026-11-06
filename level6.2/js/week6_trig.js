@@ -19,6 +19,7 @@ var aoe;
 	pearl = new GameObject({x:200, y:200, width:25, color:"cyan"});
 	
 	aoe = new GameObject({x:player.x, y:player.y, width: 600, height: 600, color:"magenta"})
+	//300 is a bit big and immediately picks up the pearl
 	
 	//friction
 	var fX = .80;
@@ -73,7 +74,7 @@ function animate()
 	}
 
 
-	aoe.drawRect();
+	//aoe.drawRect();
 	player.drawTriangle();
 	pearl.drawCircle();
 	
