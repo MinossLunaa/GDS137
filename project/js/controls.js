@@ -33,6 +33,9 @@ function mousemove(e){
     var dx = mouseX - player.x;
     var dy = mouseY - player.y;
     mouseRotation = Math.atan2 (dy, dx) + Math.PI / 2;
+
+    // flashlight.style.setProperty('--x', e.clientX + 'px');
+    // flashlight.style.setProperty('--y', e.clientY + 'px');
 }
 
 function press(e){

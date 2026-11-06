@@ -6,6 +6,8 @@ var interval = 1000/60;
 var playerHp = 100;
 var healthColor = "white";
 
+//const flashlight = document.getElementById("flashlight");
+
 //images==============================================================
 var alien = document.getElementById("alien");
 var blank = document.getElementById("blank");
@@ -18,6 +20,7 @@ var bam_sniper = document.getElementById("bam_sniper");
 
 var hp_image = document.getElementById("heart");
 var ammo_image = document.getElementById("bullet");
+
 //=====================================================================
 
 canvas = document.getElementById("canvas");
@@ -79,6 +82,7 @@ function animate(){
     player.drawPlayer();
 
 
+    context.font = "20px Arial";
     context.fillStyle = healthColor; 
     context.drawImage(hp_image, (canvas.width / 2 - 500), canvas.height - 80, 75, 75);
     context.fillText(player.hp, (canvas.width / 2 - 480), canvas.height - 30);  
