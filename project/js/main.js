@@ -6,7 +6,7 @@ var interval = 1000/60;
 const GRAVEYARD = 5000;
 var showHitboxes = true;
 
-var score = 0;
+var score = 1000;
 var playerHp = 100;
 var healthColor = "white";
 var playerModel = bam_pistol;
@@ -160,11 +160,25 @@ context.clearRect(0,0,canvas.width, canvas.height);
 var canPress = true;
 
     //name   x  y    w  h    color    hp    layer
+ var exitIcon = new GameObject(925, 700, 50, 50, "red");
+
  var icon1 = new GameObject(200, 200, 100, 100, "blue");
  var icon2 = new GameObject(400, 200, 100, 100, "blue");
  var icon3 = new GameObject(600, 200, 100, 100, "blue");
  var icon4 = new GameObject(800, 200, 100, 100, "blue");
- var exitIcon = new GameObject(800, 400, 50, 50, "red");
+
+ var icon5 = new GameObject(200, 400, 100, 100, "blue");
+ var icon6 = new GameObject(400, 400, 100, 100, "blue");
+ var icon7 = new GameObject(600, 400, 100, 100, "blue");
+ var icon8 = new GameObject(800, 400, 100, 100, "blue");
+
+ var icon9 = new GameObject(200, 600, 100, 100, "blue");
+ var icon10 = new GameObject(400, 600, 100, 100, "blue");
+ var icon11 = new GameObject(600, 600, 100, 100, "blue");
+ var icon12 = new GameObject(800, 600, 100, 100, "blue");
+
+ var icons = [exitIcon, icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10, icon11, icon12];
+ 
 
  context.fillText(score, 40, 40); 
 
@@ -173,7 +187,6 @@ var canPress = true;
         //prevents firing when clicking exit
         canShoot = false;
         setTimeout(function () {canShoot = true}, 500);
-
         currentState = "game";
     }
  }
@@ -201,7 +214,7 @@ var canPress = true;
            
             console.log("shotgun");
             icon2.color = "yellow";
-            score = score - 60;
+            score -= 60;
             click = false;
         }
     }
@@ -216,8 +229,8 @@ var canPress = true;
             sniper = false;
 
             console.log("smg");
-            icon2.color = "yellow";
-            score = score - 50;
+            icon3.color = "yellow";
+            score -= 50;
             click = false;
         }
     }
@@ -232,26 +245,139 @@ var canPress = true;
             sniper = true;
 
             console.log("sniper");
-            icon2.color = "yellow";
-            score = score - 80;
+            icon4.color = "yellow";
+            score -= 80;
             click = false;
         }
     }
  }
 
- 
- icon1.drawRect();
- icon2.drawRect();
- icon3.drawRect();
- icon4.drawRect();
- exitIcon.drawRect();
+  if(icon5.ContainsPoint(mouseX, mouseY)){
+    if(click){
+        if(score >= 20){
+            //max hp + 50
+            
+            console.log("max hp + 50");
+            icon5.color = "yellow";
+            score -= 20;
+            click = false;
+        }
+    }
+ }
 
+ if(icon6.ContainsPoint(mouseX, mouseY)){
+    if(click){
+        if(score >= 40){
+            //max hp + 100
+            
+            console.log("max hp + 100");
+            icon6.color = "yellow";
+            score -= 40;
+            click = false;
+        }
+    }
+ }
+
+ if(icon7.ContainsPoint(mouseX, mouseY)){
+    if(click){
+        if(score >= 60){
+            //speed increase
+            
+            console.log("hermes boots");
+            icon7.color = "yellow";
+            score -= 60;
+            click = false;
+        }
+    }
+ }
+
+  if(icon8.ContainsPoint(mouseX, mouseY)){
+    if(click){
+        if(score >= 40){
+            //damage + 50%
+            
+            console.log("damage + 50%");
+            icon8.color = "yellow";
+            score -= 40;
+            click = false;
+        }
+    }
+ }
+
+   if(icon9.ContainsPoint(mouseX, mouseY)){
+    if(click){
+        if(score >= 60){
+            //flashlight
+            
+            console.log("flashlight");
+            icon9.color = "yellow";
+            score -= 60;
+            click = false;
+        }
+    }
+ }
+
+    if(icon10.ContainsPoint(mouseX, mouseY)){
+    if(click){
+        if(score >= 60){
+            //vampiric
+            
+            console.log("vampiric");
+            icon10.color = "yellow";
+            score -= 60;
+            click = false;
+        }
+    }
+ }
+
+    if(icon11.ContainsPoint(mouseX, mouseY)){
+    if(click){
+        if(score >= 20){
+            //vammopiric
+            
+            console.log("vammopiric");
+            icon11.color = "yellow";
+            score -= 20;
+            click = false;
+        }
+    }
+ }
+
+    if(icon12.ContainsPoint(mouseX, mouseY)){
+    if(click){
+        if(score >= 120){
+            //SECRET
+            
+            console.log("SECRET");
+            icon12.color = "yellow";
+            score -= 120;
+            click = false;
+        }
+    }
+ }
+
+ for(var i = 0; i < 13; i++){
+    icons[i].drawRect();
+ }
+
+//temp shop text
 context.font = "20px Arial";
+context.fillText("exit", exitIcon.x - 25, exitIcon.y); 
+
 context.fillText("pistol = 0", icon1.x - 40, icon1.y); 
 context.fillText("shotgun = 60", icon2.x - 40, icon2.y); 
 context.fillText("smg = 50", icon3.x - 40, icon3.y); 
 context.fillText("sniper = 80", icon4.x - 40, icon4.y); 
-context.fillText("exit", exitIcon.x - 25, exitIcon.y); 
+
+context.fillText("max hp + 50 = 20", icon5.x - 40, icon5.y);
+context.fillText("max hp + 100 = 40", icon6.x - 40, icon6.y);
+context.fillText("hermes boots = 60", icon7.x - 40, icon7.y);
+context.fillText("damage + 50% = 40", icon8.x - 40, icon8.y);
+
+context.fillText("flashlight = 60", icon9.x - 40, icon9.y);
+context.fillText("vampiric = 60", icon10.x - 40, icon10.y);
+context.fillText("vammopiric = 20", icon11.x - 40, icon11.y);
+context.fillText("SECRET = 120", icon12.x - 40, icon12.y);
 }
 
 states["endGame"] = function(){
