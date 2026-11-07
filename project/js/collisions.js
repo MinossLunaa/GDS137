@@ -67,7 +67,7 @@ function fireRaycast(origin, mousePosition, maxDist, obstacles)
   return { hit: false };
 }
 
-function chasePlayer(enemyrad, enemy){
+function chasePlayer(enemyrad, enemy, money){
 
     if(player.collide(enemyrad) || enemy.hp < 100){
 
@@ -99,6 +99,13 @@ function chasePlayer(enemyrad, enemy){
         enemy.prevY = GRAVEYARD;
         dx = 0;
         dy = 0;
+        if(player.collide(money)){
+            money.y = GRAVEYARD;
+            score += 20;
+        }
+    } else{
+        money.x = enemy.x;
+        money.y = enemy.y;
     }
 
 }

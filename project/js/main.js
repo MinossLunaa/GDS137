@@ -6,6 +6,7 @@ var interval = 1000/60;
 const GRAVEYARD = 5000;
 var showHitboxes = true;
 
+var score = 0;
 var playerHp = 100;
 var healthColor = "white";
 var playerModel = bam_pistol;
@@ -126,7 +127,7 @@ if(sniper == true){
     wallBounds(player, wall1);
     wallBounds(enemy1, wall1);
 
-    chasePlayer(enemy1rad, enemy1);
+    chasePlayer(enemy1rad, enemy1, enemy1money);
 
     //enemy hp
     context.font = "20px Arial";
@@ -136,10 +137,10 @@ if(sniper == true){
     
     wall1.drawRect();
 
+    enemy1money.drawRect();
     enemy1.drawEnemy();
-
+    
     player.drawPlayer();
-
 
     context.font = "20px Arial";
     context.fillStyle = healthColor; 
@@ -148,6 +149,7 @@ if(sniper == true){
     context.fillStyle = "black"; 
     context.drawImage(ammo_image, (canvas.width / 2 - 435), canvas.height - 90, 90, 90);
     context.fillText(ammo, (canvas.width / 2 - 405), canvas.height - 30); 
+    context.fillText(score, (canvas.width / 2 - 320), canvas.height - 30); 
 
     context.fillText("shop", shop.x - 25, shop.y)
 }
@@ -155,12 +157,16 @@ if(sniper == true){
 states["shop"] = function(){
 context.clearRect(0,0,canvas.width, canvas.height);
 
+var canPress = true;
+
     //name   x  y    w  h    color    hp    layer
  var icon1 = new GameObject(200, 200, 100, 100, "blue");
  var icon2 = new GameObject(400, 200, 100, 100, "blue");
  var icon3 = new GameObject(600, 200, 100, 100, "blue");
  var icon4 = new GameObject(800, 200, 100, 100, "blue");
  var exitIcon = new GameObject(800, 400, 50, 50, "red");
+
+ context.fillText(score, 40, 40); 
 
  if(exitIcon.ContainsPoint(mouseX, mouseY)){
     if(click){
@@ -174,49 +180,62 @@ context.clearRect(0,0,canvas.width, canvas.height);
 
  if(icon1.ContainsPoint(mouseX, mouseY)){
     if(click){
-        icon1.color = "yellow";
-
         pistol = true;
         shotgun = false;
         smg = false;
         sniper = false;
+
         console.log("pistol");
+        icon1.color = "yellow";
+        click = false;
     }
  }
 
  if(icon2.ContainsPoint(mouseX, mouseY)){
     if(click){
-        icon2.color = "yellow";
-
-        pistol = false;
-        shotgun = true;
-        smg = false;
-        sniper = false;
-        console.log("shotgun");
+        if(score >= 60){
+            pistol = false;
+            shotgun = true;
+            smg = false;
+            sniper = false;
+           
+            console.log("shotgun");
+            icon2.color = "yellow";
+            score = score - 60;
+            click = false;
+        }
     }
  }
 
  if(icon3.ContainsPoint(mouseX, mouseY)){
     if(click){
-        icon3.color = "yellow";
+        if(score >= 50){
+            pistol = false;
+            shotgun = false;
+            smg = true;
+            sniper = false;
 
-        pistol = false;
-        shotgun = false;
-        smg = true;
-        sniper = false;
-        console.log("smg");
+            console.log("smg");
+            icon2.color = "yellow";
+            score = score - 50;
+            click = false;
+        }
     }
  }
 
  if(icon4.ContainsPoint(mouseX, mouseY)){
     if(click){
-        icon4.color = "yellow";
+        if(score >= 80){
+            pistol = false;
+            shotgun = false;
+            smg = false;
+            sniper = true;
 
-        pistol = false;
-        shotgun = false;
-        smg = false;
-        sniper = true;
-        console.log("sniper");
+            console.log("sniper");
+            icon2.color = "yellow";
+            score = score - 80;
+            click = false;
+        }
     }
  }
 
@@ -228,10 +247,10 @@ context.clearRect(0,0,canvas.width, canvas.height);
  exitIcon.drawRect();
 
 context.font = "20px Arial";
-context.fillText("pistol", icon1.x - 25, icon1.y); 
-context.fillText("shotgun", icon2.x - 25, icon2.y); 
-context.fillText("smg", icon3.x - 25, icon3.y); 
-context.fillText("sniper", icon4.x - 25, icon4.y); 
+context.fillText("pistol = 0", icon1.x - 40, icon1.y); 
+context.fillText("shotgun = 60", icon2.x - 40, icon2.y); 
+context.fillText("smg = 50", icon3.x - 40, icon3.y); 
+context.fillText("sniper = 80", icon4.x - 40, icon4.y); 
 context.fillText("exit", exitIcon.x - 25, exitIcon.y); 
 }
 
@@ -248,13 +267,13 @@ var player = new GameObject(100, canvas.height/2, 25, 25, "red", playerHp);
 
 var enemy1 = new GameObject(canvas.width - 300, canvas.height/2, 75, 75, "green", 100, 1);
 var enemy1rad = new GameObject(enemy1.x, enemy1.y, 375, 375, "yellow");
+var enemy1money = new GameObject(enemy1.x, enemy1.y, 25, 25, "lime");
 
 var wall1 = new GameObject(canvas.width / 2, canvas.height /2, 30, 400, "black", 0, 2);
 
 const targets = [wall1, /*break*/ enemy1];
 
 var shop = new GameObject(100, 100, 75, 75, "magenta");
-
 
 
 timer = setInterval(animate, interval);
