@@ -98,7 +98,7 @@ if(pistol == true){
 if(shotgun == true){
     damage = 50 * damageMult;
     shootDist = 100;
-    shootCooldown = 1750;
+    shootCooldown = 100;
     playerModel = bam_shotgun;
     ammoUsage = 2;
 }
@@ -114,7 +114,7 @@ if(smg == true){
 if(sniper == true){
     damage = 99 * damageMult;
     shootDist = 500;
-    shootCooldown = 2900;
+    shootCooldown = 2500;
     playerModel = bam_sniper;
     ammoUsage = 1;
 }
@@ -136,6 +136,8 @@ if(sniper == true){
                 if(result.enemy.layer == 1)
                 {
                 result.enemy.hp = result.enemy.hp - damage;
+                hit_sound.currentTime = 0;
+                hit_sound.play();
             }
         }
         ammo -= ammoUsage;
@@ -143,16 +145,20 @@ if(sniper == true){
         setTimeout(function () {canShoot = true}, shootCooldown);
 
             if(pistol == true){
+                pistol_sound.currentTime = 0;
                 pistol_sound.play();
             }
             if(shotgun == true){
+                shotgun_sound.currentTime = 0;
                 shotgun_sound.play();
             }
             if(sniper == true){
+                sniper_sound.currentTime = 0;
                 sniper_sound.play();
             }
             if(smg == true){
-                //smg_sound.play();
+                smg_sound.currentTime = 0;
+                smg_sound.play();
             }
         }   
     }
@@ -196,31 +202,32 @@ if(sniper == true){
 
 states["shop"] = function(){
 
+game_song.pause();
 shop_song.play();
 context.clearRect(0,0,canvas.width, canvas.height);
 
 //images ===========================================================
-var shop_img = document.getElementById("shop_img");
-var shop_pistol = document.getElementById("shop_pistol");
-var shop_pistol_hover = document.getElementById("shop_pistol_hover");
-var shop_shotgun = document.getElementById("shop_shotgun");
-var shop_shotgun_hover = document.getElementById("shop_shotgun_hover");
-var shop_sniper = document.getElementById("shop_sniper");
-var shop_sniper_hover = document.getElementById("shop_sniper_hover");
-var shop_smg = document.getElementById("shop_smg");
-var shop_smg_hover = document.getElementById("shop_smg_hover");
-var shop_max_hp = document.getElementById("shop_max_hp");
-var shop_max_hp_hover = document.getElementById("shop_max_hp_hover");
-var shop_damage = document.getElementById("shop_damage");
-var shop_damage_hover = document.getElementById("shop_damage_hover");
-var shop_hermes_boots = document.getElementById("shop_hermes_boots");
-var shop_hermes_boots_hover = document.getElementById("shop_hermes_boots_hover");
-var shop_vampiric = document.getElementById("shop_vampiric");
-var shop_vampiric_hover = document.getElementById("shop_vampiric_hover");
-var shop_vammopiric = document.getElementById("shop_vammopiric");
-var shop_vammopiric_hover = document.getElementById("shop_vammopiric_hover");
-var shop_exit = document.getElementById("shop_exit");
-var shop_exit_hover = document.getElementById("shop_exit_hover");
+// var shop_img = document.getElementById("shop_img");
+// var shop_pistol = document.getElementById("shop_pistol");
+// var shop_pistol_hover = document.getElementById("shop_pistol_hover");
+// var shop_shotgun = document.getElementById("shop_shotgun");
+// var shop_shotgun_hover = document.getElementById("shop_shotgun_hover");
+// var shop_sniper = document.getElementById("shop_sniper");
+// var shop_sniper_hover = document.getElementById("shop_sniper_hover");
+// var shop_smg = document.getElementById("shop_smg");
+// var shop_smg_hover = document.getElementById("shop_smg_hover");
+// var shop_max_hp = document.getElementById("shop_max_hp");
+// var shop_max_hp_hover = document.getElementById("shop_max_hp_hover");
+// var shop_damage = document.getElementById("shop_damage");
+// var shop_damage_hover = document.getElementById("shop_damage_hover");
+// var shop_hermes_boots = document.getElementById("shop_hermes_boots");
+// var shop_hermes_boots_hover = document.getElementById("shop_hermes_boots_hover");
+// var shop_vampiric = document.getElementById("shop_vampiric");
+// var shop_vampiric_hover = document.getElementById("shop_vampiric_hover");
+// var shop_vammopiric = document.getElementById("shop_vammopiric");
+// var shop_vammopiric_hover = document.getElementById("shop_vammopiric_hover");
+// var shop_exit = document.getElementById("shop_exit");
+// var shop_exit_hover = document.getElementById("shop_exit_hover");
 //==================================================================
 
 context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375, 1000, 750);
@@ -289,6 +296,9 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
         console.log("pistol");
         icon1.color = "yellow";
         click = false;
+
+        buy_sound.currentTime = 0;
+        buy_sound.play();
     }
  }
 
@@ -306,6 +316,12 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
             icon2.color = "yellow";
             score -= 60;
             click = false;
+            buy_sound.currentTime = 0;
+            buy_sound.play();
+        }
+        else{
+            cant_buy_sound.currentTime = 0;
+            cant_buy_sound.play();
         }
     }
  }
@@ -324,6 +340,12 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
             icon3.color = "yellow";
             score -= 80;
             click = false;
+            buy_sound.currentTime = 0;
+            buy_sound.play();
+        }
+        else{
+            cant_buy_sound.currentTime = 0;
+            cant_buy_sound.play();
         }
     }
  }
@@ -342,6 +364,12 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
             icon4.color = "yellow";
             score -= 50;
             click = false;
+            buy_sound.currentTime = 0;
+            buy_sound.play();
+        }
+        else{
+            cant_buy_sound.currentTime = 0;
+            cant_buy_sound.play();
         }
     }
  }
@@ -358,6 +386,12 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
             icon5.color = "yellow";
             score -= 40;
             click = false;
+            buy_sound.currentTime = 0;
+            buy_sound.play();
+        }
+        else{
+            cant_buy_sound.currentTime = 0;
+            cant_buy_sound.play();
         }
     }
  }
@@ -373,6 +407,12 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
             icon6.color = "yellow";
             score -= 40;
             click = false;
+            buy_sound.currentTime = 0;
+            buy_sound.play();
+        }
+        else{
+            cant_buy_sound.currentTime = 0;
+            cant_buy_sound.play();
         }
     }
  }
@@ -388,6 +428,12 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
             icon7.color = "yellow";
             score -= 60;
             click = false;
+            buy_sound.currentTime = 0;
+            buy_sound.play();
+        }
+        else{
+            cant_buy_sound.currentTime = 0;
+            cant_buy_sound.play();
         }
     }
  }
@@ -403,6 +449,12 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
             icon8.color = "yellow";
             score -= 60;
             click = false;
+            buy_sound.currentTime = 0;
+            buy_sound.play();
+        }
+        else{
+            cant_buy_sound.currentTime = 0;
+            cant_buy_sound.play();
         }
     }
  }
@@ -418,6 +470,12 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
             icon9.color = "yellow";
             score -= 20;
             click = false;
+            buy_sound.currentTime = 0;
+            buy_sound.play();
+        }
+        else{
+            cant_buy_sound.currentTime = 0;
+            cant_buy_sound.play();
         }
     }
  }
