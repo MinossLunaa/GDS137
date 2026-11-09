@@ -6,13 +6,16 @@ var interval = 1000/60;
 const GRAVEYARD = 5000;
 var showHitboxes = true;
 
+//upgrades
+var hpMult = 0;
+var damageMult = 1;
+var speedMult = 1;
+var vampiric = false;
+var vammopiric = false;
+
 var score = 1000;
-var playerHp = 100;
 var healthColor = "white";
 var playerModel = bam_pistol;
-var playerSpeed = 5;
-var vx = playerSpeed;
-var vy = playerSpeed;
 
 var ammo = 10;
 var ammoUsage = 1;
@@ -30,8 +33,6 @@ var damage = 0;
 var shootDist = 0;
 var shootCooldown = 0;
 
-//const flashlight = document.getElementById("flashlight");
-
 //images==============================================================
 var alien = document.getElementById("alien");
 var blank = document.getElementById("blank");
@@ -44,6 +45,7 @@ var bam_sniper = document.getElementById("bam_sniper");
 
 var hp_image = document.getElementById("heart");
 var ammo_image = document.getElementById("bullet");
+var money_image = document.getElementById("money");
 
 //=====================================================================
 var states = [];
@@ -54,6 +56,9 @@ states["mainMenu"] = function(){
 
 states["game"] = function(){
 
+    var vx = 5 * speedMult;
+    var vy = 5 * speedMult;
+
     context.clearRect(0,0,canvas.width, canvas.height);
 
     var startingX = 100;
@@ -61,7 +66,7 @@ states["game"] = function(){
 
 //guns ===============================================
 if(pistol == true){
-    damage = 25;
+    damage = 25 * damageMult;
     shootDist = 200;
     shootCooldown = 1000;
     playerModel = bam_pistol;
@@ -69,7 +74,7 @@ if(pistol == true){
 }
 
 if(shotgun == true){
-    damage = 50;
+    damage = 50 * damageMult;
     shootDist = 100;
     shootCooldown = 1000;
     playerModel = bam_shotgun;
@@ -77,7 +82,7 @@ if(shotgun == true){
 }
 
 if(smg == true){
-    damage = 5;
+    damage = 5 * damageMult;
     shootDist = 200;
     shootCooldown = 100;
     playerModel = bam_smg;
@@ -85,7 +90,7 @@ if(smg == true){
 }
 
 if(sniper == true){
-    damage = 99;
+    damage = 99 * damageMult;
     shootDist = 500;
     shootCooldown = 2000;
     playerModel = bam_sniper;
@@ -149,7 +154,8 @@ if(sniper == true){
     context.fillStyle = "black"; 
     context.drawImage(ammo_image, (canvas.width / 2 - 435), canvas.height - 90, 90, 90);
     context.fillText(ammo, (canvas.width / 2 - 405), canvas.height - 30); 
-    context.fillText(score, (canvas.width / 2 - 320), canvas.height - 30); 
+    context.drawImage(money_image, (canvas.width / 2 - 350), canvas.height - 65, 60, 60);
+    context.fillText(score, (canvas.width / 2 - 340), canvas.height - 30); 
 
     context.fillText("shop", shop.x - 25, shop.y)
 }
@@ -157,32 +163,76 @@ if(sniper == true){
 states["shop"] = function(){
 context.clearRect(0,0,canvas.width, canvas.height);
 
-var canPress = true;
+//images ===========================================================
+var shop_img = document.getElementById("shop_img");
+var shop_pistol = document.getElementById("shop_pistol");
+var shop_pistol_hover = document.getElementById("shop_pistol_hover");
+var shop_shotgun = document.getElementById("shop_shotgun");
+var shop_shotgun_hover = document.getElementById("shop_shotgun_hover");
+var shop_sniper = document.getElementById("shop_sniper");
+var shop_sniper_hover = document.getElementById("shop_sniper_hover");
+var shop_smg = document.getElementById("shop_smg");
+var shop_smg_hover = document.getElementById("shop_smg_hover");
+var shop_max_hp = document.getElementById("shop_max_hp");
+var shop_max_hp_hover = document.getElementById("shop_max_hp_hover");
+var shop_damage = document.getElementById("shop_damage");
+var shop_damage_hover = document.getElementById("shop_damage_hover");
+var shop_hermes_boots = document.getElementById("shop_hermes_boots");
+var shop_hermes_boots_hover = document.getElementById("shop_hermes_boots_hover");
+var shop_vampiric = document.getElementById("shop_vampiric");
+var shop_vampiric_hover = document.getElementById("shop_vampiric_hover");
+var shop_vammopiric = document.getElementById("shop_vammopiric");
+var shop_vammopiric_hover = document.getElementById("shop_vammopiric_hover");
+var shop_exit = document.getElementById("shop_exit");
+var shop_exit_hover = document.getElementById("shop_exit_hover");
+//==================================================================
+
+context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375, 1000, 750);
 
     //name   x  y    w  h    color    hp    layer
- var exitIcon = new GameObject(925, 700, 50, 50, "red");
+ var exitIcon = new GameObject(890, 600, 175, 175, "red");
 
- var icon1 = new GameObject(200, 200, 100, 100, "blue");
- var icon2 = new GameObject(400, 200, 100, 100, "blue");
- var icon3 = new GameObject(600, 200, 100, 100, "blue");
- var icon4 = new GameObject(800, 200, 100, 100, "blue");
+ var icon1 = new GameObject(125, 100, 200, 200, "blue");
+ var icon2 = new GameObject(410, 100, 200, 200, "blue");
+ var icon3 = new GameObject(790, 100, 400, 200, "blue");
 
- var icon5 = new GameObject(200, 400, 100, 100, "blue");
- var icon6 = new GameObject(400, 400, 100, 100, "blue");
- var icon7 = new GameObject(600, 400, 100, 100, "blue");
- var icon8 = new GameObject(800, 400, 100, 100, "blue");
+ var icon4 = new GameObject(125, 350, 200, 200, "blue");
+ var icon5 = new GameObject(365, 350, 200, 200, "blue");
+ var icon6 = new GameObject(620, 350, 200, 200, "blue");
 
- var icon9 = new GameObject(200, 600, 100, 100, "blue");
- var icon10 = new GameObject(400, 600, 100, 100, "blue");
- var icon11 = new GameObject(600, 600, 100, 100, "blue");
- var icon12 = new GameObject(800, 600, 100, 100, "blue");
+ var icon7 = new GameObject(125, 575, 200, 200, "blue");
+ var icon8 = new GameObject(365, 575, 200, 200, "blue");
+ var icon9 = new GameObject(600, 575, 200, 200, "blue");
 
- var icons = [exitIcon, icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10, icon11, icon12];
+ var icons = [exitIcon, icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9];
+
+//  if(showHitboxes == true){
+//     for(var i = 0; i < 10; i++){
+//         icons[i].drawRect();
+//     }
+//  }
+
+ context.drawImage(shop_pistol, (icon1.x / 2) - 35, (icon1.y / 2) - 55, 269, 223);
+ context.drawImage(shop_shotgun, (icon2.x - 120), (icon2.y / 2) - 40, 269, 223);
+ context.drawImage(shop_sniper, (icon3.x - 200), (icon3.y / 2) - 40, 423, 207);
+
+ context.drawImage(shop_smg, (icon4.x - 125), (icon4.y - 50) - 40, 297, 211);
+ context.drawImage(shop_max_hp, (icon5.x - 100), (icon5.y - 50) - 40, 243, 219);
+ context.drawImage(shop_damage, (icon6.x - 85), (icon6.y - 50) - 40, 215, 205);
+
+ context.drawImage(shop_hermes_boots, (icon7.x - 115), (icon7.y - 60) - 40, 265, 253);
+ context.drawImage(shop_vampiric, (icon8.x - 100), (icon8.y - 50) - 40, 243, 219);
+ context.drawImage(shop_vammopiric, (icon9.x - 75), (icon9.y - 50) - 40, 229, 205);
  
+ context.drawImage(money, (exitIcon.x - 100), (exitIcon.y - 225) - 40, 205, 159);
+ context.drawImage(shop_exit, (exitIcon.x - 100), (exitIcon.y - 50) - 40, 205, 159);
 
- context.fillText(score, 40, 40); 
+ context.font = "40px Arial";
+ context.fillText(score, exitIcon.x - 35, exitIcon.y - 175);
 
  if(exitIcon.ContainsPoint(mouseX, mouseY)){
+    context.drawImage(shop_exit_hover, (exitIcon.x - 100), (exitIcon.y - 50) - 40, 205, 159);
+
     if(click){
         //prevents firing when clicking exit
         canShoot = false;
@@ -192,6 +242,8 @@ var canPress = true;
  }
 
  if(icon1.ContainsPoint(mouseX, mouseY)){
+    context.drawImage(shop_pistol_hover, (icon1.x / 2) - 35, (icon1.y / 2) - 55, 269, 223);
+
     if(click){
         pistol = true;
         shotgun = false;
@@ -205,6 +257,8 @@ var canPress = true;
  }
 
  if(icon2.ContainsPoint(mouseX, mouseY)){
+    context.drawImage(shop_shotgun_hover, (icon2.x - 120), (icon2.y / 2) - 40, 269, 223);
+
     if(click){
         if(score >= 60){
             pistol = false;
@@ -221,22 +275,8 @@ var canPress = true;
  }
 
  if(icon3.ContainsPoint(mouseX, mouseY)){
-    if(click){
-        if(score >= 50){
-            pistol = false;
-            shotgun = false;
-            smg = true;
-            sniper = false;
+    context.drawImage(shop_sniper_hover, (icon3.x - 200), (icon3.y / 2) - 40, 423, 207);
 
-            console.log("smg");
-            icon3.color = "yellow";
-            score -= 50;
-            click = false;
-        }
-    }
- }
-
- if(icon4.ContainsPoint(mouseX, mouseY)){
     if(click){
         if(score >= 80){
             pistol = false;
@@ -245,32 +285,55 @@ var canPress = true;
             sniper = true;
 
             console.log("sniper");
-            icon4.color = "yellow";
+            icon3.color = "yellow";
             score -= 80;
             click = false;
         }
     }
  }
 
-  if(icon5.ContainsPoint(mouseX, mouseY)){
+ if(icon4.ContainsPoint(mouseX, mouseY)){
+    context.drawImage(shop_smg_hover, (icon4.x - 125), (icon4.y - 50) - 40, 297, 211);
+
     if(click){
-        if(score >= 20){
-            //max hp + 50
-            
-            console.log("max hp + 50");
+        if(score >= 50){
+            pistol = false;
+            shotgun = false;
+            smg = true;
+            sniper = false;
+
+            console.log("smg");
+            icon4.color = "yellow";
+            score -= 50;
+            click = false;
+        }
+    }
+ }
+
+  if(icon5.ContainsPoint(mouseX, mouseY)){
+    context.drawImage(shop_max_hp_hover, (icon5.x - 100), (icon5.y - 50) - 40, 243, 219);
+
+    if(click){
+        if(score >= 40){
+            hpMult = 100;
+            player.hp += hpMult;
+
+            console.log("max hp + 100");
             icon5.color = "yellow";
-            score -= 20;
+            score -= 40;
             click = false;
         }
     }
  }
 
  if(icon6.ContainsPoint(mouseX, mouseY)){
+    context.drawImage(shop_damage_hover, (icon6.x - 85), (icon6.y - 50) - 40, 215, 205);
+
     if(click){
         if(score >= 40){
-            //max hp + 100
+            damageMult = 1.5;
             
-            console.log("max hp + 100");
+            console.log("damage + 50%");
             icon6.color = "yellow";
             score -= 40;
             click = false;
@@ -279,9 +342,11 @@ var canPress = true;
  }
 
  if(icon7.ContainsPoint(mouseX, mouseY)){
+    context.drawImage(shop_hermes_boots_hover, (icon7.x - 115), (icon7.y - 60) - 40, 265, 253);
+
     if(click){
         if(score >= 60){
-            //speed increase
+            speedMult = 1.15;
             
             console.log("hermes boots");
             icon7.color = "yellow";
@@ -292,104 +357,46 @@ var canPress = true;
  }
 
   if(icon8.ContainsPoint(mouseX, mouseY)){
+    context.drawImage(shop_vampiric_hover, (icon8.x - 100), (icon8.y - 50) - 40, 243, 219);
+
     if(click){
-        if(score >= 40){
-            //damage + 50%
+        if(score >= 60){
+            vampiric = true;
             
-            console.log("damage + 50%");
+            console.log("vampiric");
             icon8.color = "yellow";
-            score -= 40;
+            score -= 60;
             click = false;
         }
     }
  }
 
    if(icon9.ContainsPoint(mouseX, mouseY)){
-    if(click){
-        if(score >= 60){
-            //flashlight
-            
-            console.log("flashlight");
-            icon9.color = "yellow";
-            score -= 60;
-            click = false;
-        }
-    }
- }
+    context.drawImage(shop_vammopiric_hover, (icon9.x - 75), (icon9.y - 50) - 40, 229, 205);
 
-    if(icon10.ContainsPoint(mouseX, mouseY)){
-    if(click){
-        if(score >= 60){
-            //vampiric
-            
-            console.log("vampiric");
-            icon10.color = "yellow";
-            score -= 60;
-            click = false;
-        }
-    }
- }
-
-    if(icon11.ContainsPoint(mouseX, mouseY)){
     if(click){
         if(score >= 20){
-            //vammopiric
+            vammopiric = true;
             
             console.log("vammopiric");
-            icon11.color = "yellow";
+            icon9.color = "yellow";
             score -= 20;
             click = false;
         }
     }
  }
-
-    if(icon12.ContainsPoint(mouseX, mouseY)){
-    if(click){
-        if(score >= 120){
-            //SECRET
-            
-            console.log("SECRET");
-            icon12.color = "yellow";
-            score -= 120;
-            click = false;
-        }
-    }
- }
-
- for(var i = 0; i < 13; i++){
-    icons[i].drawRect();
- }
-
-//temp shop text
-context.font = "20px Arial";
-context.fillText("exit", exitIcon.x - 25, exitIcon.y); 
-
-context.fillText("pistol = 0", icon1.x - 40, icon1.y); 
-context.fillText("shotgun = 60", icon2.x - 40, icon2.y); 
-context.fillText("smg = 50", icon3.x - 40, icon3.y); 
-context.fillText("sniper = 80", icon4.x - 40, icon4.y); 
-
-context.fillText("max hp + 50 = 20", icon5.x - 40, icon5.y);
-context.fillText("max hp + 100 = 40", icon6.x - 40, icon6.y);
-context.fillText("hermes boots = 60", icon7.x - 40, icon7.y);
-context.fillText("damage + 50% = 40", icon8.x - 40, icon8.y);
-
-context.fillText("flashlight = 60", icon9.x - 40, icon9.y);
-context.fillText("vampiric = 60", icon10.x - 40, icon10.y);
-context.fillText("vammopiric = 20", icon11.x - 40, icon11.y);
-context.fillText("SECRET = 120", icon12.x - 40, icon12.y);
 }
 
 states["endGame"] = function(){
 
 }
-var currentState = "game";
+var currentState = "shop";
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
 
 //name   x  y    w  h    color    hp    layer
-var player = new GameObject(100, canvas.height/2, 25, 25, "red", playerHp);
+var player = new GameObject(100, canvas.height/2, 25, 25, "red", 100);
 
 var enemy1 = new GameObject(canvas.width - 300, canvas.height/2, 75, 75, "green", 100, 1);
 var enemy1rad = new GameObject(enemy1.x, enemy1.y, 375, 375, "yellow");

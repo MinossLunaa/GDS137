@@ -102,7 +102,16 @@ function chasePlayer(enemyrad, enemy, money){
         if(player.collide(money)){
             money.y = GRAVEYARD;
             score += 20;
+
+            if(vampiric == true){
+                player.hp += 40;
+            }
+            if(vammopiric == true){
+                ammo += 5;
+            }
         }
+        
+        
     } else{
         money.x = enemy.x;
         money.y = enemy.y;

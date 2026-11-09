@@ -9,47 +9,39 @@ canvas{
     display: block;
 }
 
-/* #flashlight{
-    height: 100%;
-    width: 100%;
-    --x: 0px;
-    --y: 0px;
-    background: radial-gradient(circle at var(--x) var(--y), transparent 0px, black 150px);
-    position: absolute;
-    top: 0;
-    left: 0;
-} */
+#shooting{display:none}
 
+#alien{display:none}
 
-#shooting{
-    display:none;
-}
+#blank{display:none}
 
-#alien{
-    display:none;
-}
+#bullet{display:none}
+#heart{display:none}
+#money{display:none}
 
-#blank{
-    display:none;
-}
+#bam_pistol{display:none}
+#bam_shotgun{display:none}
+#bam_smg{display:none}
+#bam_sniper{display:none}
 
-#bullet{
-    display:none;
-}
-#heart{
-    display:none;
-}
-
-#bam_pistol{
-    display:none;
-}
-#bam_shotgun{
-    display:none;
-}
-#bam_smg{
-    display:none;
-}
-#bam_sniper{
-    display:none;
-}
-
+#shop_img{display:none}
+#shop_pistol{display:none}
+#shop_pistol_hover{display:none}
+#shop_shotgun{display:none}
+#shop_shotgun_hover{display:none}
+#shop_sniper{display:none}
+#shop_sniper_hover{display:none}
+#shop_smg{display:none}
+#shop_smg_hover{display:none}
+#shop_max_hp{display:none}
+#shop_max_hp_hover{display:none}
+#shop_damage{display:none}
+#shop_damage_hover{display:none}
+#shop_hermes_boots{display:none}
+#shop_hermes_boots_hover{display:none}
+#shop_vampiric{display:none}
+#shop_vampiric_hover{display:none}
+#shop_vammopiric{display:none}
+#shop_vammopiric_hover{display:none}
+#shop_exit{display:none}
+#shop_exit_hover{display:none}
