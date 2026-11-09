@@ -47,18 +47,40 @@ var hp_image = document.getElementById("heart");
 var ammo_image = document.getElementById("bullet");
 var money_image = document.getElementById("money");
 
-//=====================================================================
+//sounds================================================================
+
+
+canvas = document.getElementById("canvas");
+context = canvas.getContext("2d");
+
+//name   x  y    w  h    color    hp    layer
+var player = new GameObject(100, canvas.height/2, 25, 25, "red", 100);
+
+var enemy1 = new GameObject(700, 375, 75, 75, "green", 100, 1);
+var enemy1rad = new GameObject(enemy1.x, enemy1.y, 375, 375, "yellow");
+var enemy1money = new GameObject(enemy1.x, enemy1.y, 25, 25, "lime");
+
+var wall1 = new GameObject(canvas.width / 2, canvas.height /2, 30, 400, "black", 0, 2);
+
+const targets = [wall1, /*break*/ enemy1];
+
+var shop = new GameObject(100, 100, 75, 75, "magenta");
+
+timer = setInterval(animate, interval);
+
 var states = [];
+var currentState = "shop";
 
 states["mainMenu"] = function(){
      
 }
 
 states["game"] = function(){
-
     var vx = 5 * speedMult;
     var vy = 5 * speedMult;
 
+    shop_song.pause();
+    game_song.play();
     context.clearRect(0,0,canvas.width, canvas.height);
 
     var startingX = 100;
@@ -76,7 +98,7 @@ if(pistol == true){
 if(shotgun == true){
     damage = 50 * damageMult;
     shootDist = 100;
-    shootCooldown = 1000;
+    shootCooldown = 1750;
     playerModel = bam_shotgun;
     ammoUsage = 2;
 }
@@ -92,7 +114,7 @@ if(smg == true){
 if(sniper == true){
     damage = 99 * damageMult;
     shootDist = 500;
-    shootCooldown = 2000;
+    shootCooldown = 2900;
     playerModel = bam_sniper;
     ammoUsage = 1;
 }
@@ -119,8 +141,20 @@ if(sniper == true){
         ammo -= ammoUsage;
         canShoot = false;
         setTimeout(function () {canShoot = true}, shootCooldown);
-        }   
 
+            if(pistol == true){
+                pistol_sound.play();
+            }
+            if(shotgun == true){
+                shotgun_sound.play();
+            }
+            if(sniper == true){
+                sniper_sound.play();
+            }
+            if(smg == true){
+                //smg_sound.play();
+            }
+        }   
     }
 
     if(player.collide(shop)){
@@ -128,7 +162,7 @@ if(sniper == true){
         player.x = startingX;
         player.y = startingY;
     }
-
+    
     wallBounds(player, wall1);
     wallBounds(enemy1, wall1);
 
@@ -157,10 +191,12 @@ if(sniper == true){
     context.drawImage(money_image, (canvas.width / 2 - 350), canvas.height - 65, 60, 60);
     context.fillText(score, (canvas.width / 2 - 340), canvas.height - 30); 
 
-    context.fillText("shop", shop.x - 25, shop.y)
+    context.fillText("shop", shop.x - 25, shop.y);
 }
 
 states["shop"] = function(){
+
+shop_song.play();
 context.clearRect(0,0,canvas.width, canvas.height);
 
 //images ===========================================================
@@ -390,26 +426,7 @@ context.drawImage(shop_img, (canvas.width / 2) - 500, (canvas.height / 2) - 375,
 states["endGame"] = function(){
 
 }
-var currentState = "shop";
 
-canvas = document.getElementById("canvas");
-context = canvas.getContext("2d");
-
-//name   x  y    w  h    color    hp    layer
-var player = new GameObject(100, canvas.height/2, 25, 25, "red", 100);
-
-var enemy1 = new GameObject(canvas.width - 300, canvas.height/2, 75, 75, "green", 100, 1);
-var enemy1rad = new GameObject(enemy1.x, enemy1.y, 375, 375, "yellow");
-var enemy1money = new GameObject(enemy1.x, enemy1.y, 25, 25, "lime");
-
-var wall1 = new GameObject(canvas.width / 2, canvas.height /2, 30, 400, "black", 0, 2);
-
-const targets = [wall1, /*break*/ enemy1];
-
-var shop = new GameObject(100, 100, 75, 75, "magenta");
-
-
-timer = setInterval(animate, interval);
 
 function animate(){
 states[currentState]();
