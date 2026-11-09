@@ -204,6 +204,7 @@ states["shop"] = function(){
 
 game_song.pause();
 shop_song.play();
+shop_song.volume = 0.25;
 context.clearRect(0,0,canvas.width, canvas.height);
 
 //images ===========================================================
